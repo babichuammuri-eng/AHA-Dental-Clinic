@@ -1,0 +1,22 @@
+# Render Blueprint: Render reads this file from GitHub and creates the web service.
+services:
+  - type: web
+    name: aha-dental
+    runtime: node
+    plan: free              # free: the database resets on every restart or redeploy (fine for a demo). For real patients see README.
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true  # Render creates a long random secret
+      - key: RECEPTION_PASSWORD
+        sync: false          # you type it in Render's dashboard (at least 10 characters), it is never stored in GitHub
+      - key: DOCTOR_PASSWORD
+        sync: false
+      - key: SAMPLE_DATA
+        value: 1             # sample patients and receipts for the presentation; remove this line for the real clinic

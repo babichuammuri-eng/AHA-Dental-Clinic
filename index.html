@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AHA Dental Clinic · Addis Ababa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="#top"><i><svg viewBox="0 0 24 24" fill="none" stroke="#12302e" stroke-width="2.6" stroke-linecap="round"><path d="M4 9q8 12 16 0"/></svg></i> AHA Dental</a>
+  <nav><a href="#about">About</a><a href="#services">Services</a><a href="#team">Our doctors</a><a href="booking.html">My booking</a><a class="cta" href="#book">Book now</a></nav>
+</div></header>
+
+<div class="hero" id="top"><div class="wrap">
+  <div class="hero-text">
+    <h1>Healthy teeth, easy smiles.</h1>
+    <p>Five dentists, one calm clinic in Addis Ababa. Choose every treatment you need in one booking, and we match you with the right doctor automatically.</p>
+    <div class="hero-actions"><a class="btn ghost" href="booking.html">Check my booking</a></div>
+  </div>
+  <div class="photo" id="photo">
+    <span class="chip glass a">Open Mon to Sat</span>
+    <span class="chip glass b">The right doctor, automatically</span>
+  </div>
+
+  <div class="wizard glass" id="book">
+    <form id="wizard" novalidate>
+      <div class="steps" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
+
+      <div data-step="1">
+        <h2>1. Choose your services</h2>
+        <p class="hint">Select as many as you need. Each one goes to the matching doctor.</p>
+        <div class="checks" id="serviceChecks"></div>
+      </div>
+
+      <div data-step="2" hidden>
+        <h2>2. Pick a day and time</h2>
+        <p class="hint" id="durationHint"></p>
+        <label for="date">Date</label><input id="date" type="date">
+        <label id="timeLabel">Start time</label>
+        <div class="slots" id="slots" aria-labelledby="timeLabel"></div>
+      </div>
+
+      <div data-step="3" hidden>
+        <h2>3. Your details</h2>
+        <label for="name">Full name</label><input id="name" autocomplete="name">
+        <div class="row">
+          <div><label for="phone">Phone</label><input id="phone" type="tel" autocomplete="tel" placeholder="09 11 22 33 44"></div>
+          <div><label for="email">Email (optional)</label><input id="email" type="email" autocomplete="email"></div>
+        </div>
+        <div style="position:absolute;left:-9999px" aria-hidden="true"><label for="website">Leave this empty</label><input id="website" tabindex="-1" autocomplete="off"></div>
+        <label for="notes">What brings you in? (optional)</label><textarea id="notes" rows="2"></textarea>
+        <ul class="summary" id="planSummary"></ul>
+      </div>
+
+      <div class="wizard-nav">
+        <button class="btn ghost" type="button" id="back" hidden>Back</button>
+        <span class="total" id="total"></span>
+        <button class="btn" type="submit" id="next">Continue</button>
+      </div>
+      <p id="msg" role="status"></p>
+    </form>
+    <div class="done" id="done" hidden></div>
+  </div>
+</div></div>
+
+<section id="about"><div class="wrap">
+  <div class="about">
+    <div>
+      <h2>A neighbourhood clinic that grew with its patients</h2>
+      <p>AHA Dental opened in 2012 with one chair and one dentist. Today five dentists share the same simple idea: explain the treatment first, then do only what you need.</p>
+      <p>Every visit is saved in your patient record, so your doctor already knows your history, your medicines and your allergies when you come back.</p>
+    </div>
+    <div class="history glass">
+      <div><b>2012</b>Dr. Ammar opens the clinic with a single chair.</div>
+      <div><b>2016</b>Orthodontics joins, bringing braces and aligners.</div>
+      <div><b>2021</b>A children's room opens with Dr. Hiwot.</div>
+    </div>
+  </div>
+  <h2 style="margin-top:3rem;font-size:1.6rem">Smiles we are proud of</h2>
+  <div class="gallery" id="gallery" aria-label="Happy patients"></div>
+</div></section>
+
+<section id="services"><div class="wrap">
+  <h2>What we treat</h2>
+  <div class="list" id="serviceList"></div>
+  <p class="hint" style="margin-top:1rem">Prices are starting prices in Ethiopian birr. Your doctor confirms the final cost after the exam.</p>
+</div></section>
+
+<section id="team"><div class="wrap">
+  <h2>Meet your doctors</h2>
+  <div class="team" id="teamList"></div>
+</div></section>
+
+<footer><div class="wrap">
+  <div><h3 id="clName">AHA Dental Clinic</h3><span id="clAddress">Bole Road, Addis Ababa, Ethiopia</span></div>
+  <div><h3>Hours</h3><span id="clHours">Monday to Saturday, 9:00 to 17:00</span></div>
+  <div><h3>Contact</h3><span id="clPhone">+251 11 000 0000</span><br><a href="booking.html">Check my booking</a></div>
+</div></footer>
+
+<script src="js/common.js"></script>
+<script src="js/faces.js"></script>
+<script src="js/payment.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>

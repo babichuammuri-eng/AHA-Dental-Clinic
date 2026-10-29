@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Staff sign in · AHA Dental Clinic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+<main class="login"><form class="box glass" id="loginForm" autocomplete="on">
+  <div class="mark"><i><svg viewBox="0 0 24 24" fill="none" stroke="#12302e" stroke-width="2.6" stroke-linecap="round"><path d="M4 9q8 12 16 0"/></svg></i>AHA Dental Clinic</div>
+  <h1>Staff sign in</h1>
+  <p class="hint">For authorized reception staff and doctors. Sign in with your own account.</p>
+  <label for="u">Username</label><input id="u" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+  <label for="p">Password</label><input id="p" type="password" autocomplete="current-password" required>
+  <button class="btn" type="submit">Sign in</button>
+  <p class="err" id="msg" role="alert"></p>
+  <p class="hint" style="margin-top:1rem"><a href="/">Back to the website</a></p>
+</form></main>
+<script src="/js/common.js"></script>
+<script src="/js/staff-login.js"></script>
+</body>
+</html>

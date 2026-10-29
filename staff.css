@@ -1,0 +1,82 @@
+/* Reception and doctor dashboards (both support light and dark mode). */
+.top { position: sticky; top: 0; z-index: 10; background: rgba(12, 43, 42, .88); color: #fff;
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.top .in { width: min(1120px, 100% - 1.5rem); margin-inline: auto; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .8rem 0; }
+.top h1 { font-size: 1.15rem; min-width: 0; } .top small { display: block; opacity: .75; font-size: .8rem; font-family: Figtree, system-ui, sans-serif; letter-spacing: 0; }
+.top .tools { display: flex; gap: .5rem; align-items: center; }
+.top .btn.ghost { color: #fff; border-color: rgba(255, 255, 255, .35); }
+.live { display: inline-flex; align-items: center; gap: .35rem; font-size: .8rem; opacity: .85; }
+.live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; }
+@keyframes pulse { 50% { opacity: .35; } }
+.page { width: min(1120px, 100% - 1.5rem); margin: 1.2rem auto 3rem; }
+.page > h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: .8rem; margin-bottom: 1rem; }
+.stat { border-radius: 16px; padding: 1rem 1.1rem; }
+.stat b { display: block; font: 700 2rem 'Bricolage Grotesque', Figtree, system-ui, sans-serif; line-height: 1.1; } .stat span { color: var(--muted); font-size: .88rem; }
+.panels { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; margin-bottom: 1.2rem; }
+.panels.two { grid-template-columns: 1fr 2fr; }
+.panel { border-radius: 16px; padding: 1.1rem 1.2rem; } .panel h3 { font-size: 1rem; margin-bottom: .8rem; }
+
+/* Charts built with plain CSS */
+.chart { display: flex; align-items: stretch; gap: .5rem; height: 150px; }
+.bar { flex: 1; display: flex; flex-direction: column; align-items: center; min-width: 0; }
+.bar-track { flex: 1; width: 100%; display: flex; align-items: flex-end; }
+.bar-fill { width: 100%; min-height: 3px; border-radius: 6px 6px 0 0; background: linear-gradient(180deg, #14b8a6, var(--teal)); }
+.bar-val, .bar-label { font-size: .75rem; color: var(--muted); }
+.hbar { display: grid; grid-template-columns: 38% 1fr 2rem; gap: .5rem; align-items: center; font-size: .82rem; margin-bottom: .35rem; }
+.hbar span:first-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hbar i { display: block; height: 9px; border-radius: 9px; background: linear-gradient(90deg, #14b8a6, var(--teal)); }
+
+.tabs { display: flex; gap: .4rem; margin-bottom: 1rem; overflow-x: auto; }
+.tabs button { font: 600 .92rem Figtree, system-ui, sans-serif; padding: .5rem 1rem; border-radius: 99px; border: 1.5px solid var(--line); background: transparent; color: var(--text); cursor: pointer; white-space: nowrap; }
+.tabs button[aria-selected="true"] { background: var(--teal); border-color: var(--teal); color: #fff; }
+.toolbar { display: flex; gap: .6rem; flex-wrap: wrap; align-items: end; margin-bottom: 1rem; }
+.toolbar > div { flex: 1 1 140px; } .toolbar .grow { flex: 2 1 200px; } .toolbar label { margin-top: 0; }
+
+.items { display: grid; gap: .7rem; }
+.item-card { border-radius: 16px; padding: 1rem 1.2rem; display: grid; grid-template-columns: 1.1fr 1.4fr auto; gap: 1rem; align-items: center; }
+.item-card h3 { font-size: 1.05rem; } .item-card .meta { color: var(--muted); font-size: .88rem; }
+.item-card ul { list-style: none; padding: 0; font-size: .92rem; } .item-card li { padding: .1rem 0; }
+.item-card li b { display: inline-block; min-width: 3rem; }
+.actions { display: flex; gap: .4rem; flex-wrap: wrap; justify-content: flex-end; }
+.visit .time { font: 700 1.5rem 'Bricolage Grotesque', Figtree, system-ui, sans-serif; }
+.visit.done-visit { opacity: .75; }
+.tag { display: inline-block; padding: .05rem .55rem; border-radius: 8px; font-size: .78rem; font-weight: 600; background: rgba(232, 163, 61, .22); color: #8a5a00; }
+[data-theme="dark"] .tag { color: #ffd58a; }
+.empty { border-radius: 16px; padding: 2rem; text-align: center; color: var(--muted); border: 1.5px dashed var(--line); }
+
+/* Patient record */
+.record h2 { font-size: 1.4rem; } .record .hint { margin-bottom: .6rem; }
+.rec { border-left: 3px solid var(--teal); padding: .2rem 0 .2rem 1rem; margin: 1rem 0; }
+.rec h4 { font-size: .95rem; } .rec p { font-size: .92rem; margin-top: .15rem; } .rec p b { color: var(--teal); }
+.dfoot { display: flex; gap: .6rem; justify-content: flex-end; margin-top: 1.2rem; }
+.checks.plain { display: grid; gap: .4rem; max-height: 200px; overflow-y: auto; margin-top: .3rem; }
+.checks.plain .check { padding: .45rem .7rem; background: var(--input); }
+.checks.plain .check:has(input:checked) { background: rgba(15, 118, 110, .2); }
+
+@media (max-width: 860px) {
+  .stats { grid-template-columns: 1fr 1fr; } .panels, .panels.two { grid-template-columns: 1fr; }
+  .item-card { grid-template-columns: 1fr; } .actions { justify-content: flex-start; }
+}
+@media (max-width: 480px) { .top h1 { font-size: 1rem; } .top .live { display: none; } .top small { display: none; } .row { grid-template-columns: 1fr; } }
+
+.paid-line { display: flex; gap: .4rem; flex-wrap: wrap; align-items: center; margin-top: .3rem; font-size: .86rem; color: var(--muted); }
+.paid-line b { font-family: 'Courier New', monospace; color: var(--text); }
+
+/* Payments and receipts */
+.mtiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: .6rem; margin: 1rem 0; }
+.mtile { border-radius: 12px; padding: .7rem .9rem; background: var(--input); border: 1px solid var(--line); }
+.mtile span { display: block; font-size: .78rem; color: var(--muted); } .mtile b { font: 700 1.15rem 'Bricolage Grotesque', Figtree, system-ui, sans-serif; }
+.mtile.good b { color: var(--teal); } .mtile.warn b { color: #b7791f; }
+.txn { border: 1px solid var(--line); border-radius: 12px; padding: .8rem 1rem; margin-bottom: .6rem; background: var(--input); }
+.txn.rejected { opacity: .65; } .txn-top { display: flex; justify-content: space-between; gap: 1rem; align-items: center; flex-wrap: wrap; }
+.txn .amt { font: 700 1.1rem 'Bricolage Grotesque', Figtree, system-ui, sans-serif; } .txn .neg { color: var(--err); }
+.txn .meta { font-size: .84rem; margin-top: .15rem; } .txn .actions { margin-top: .5rem; justify-content: flex-start; }
+.wide { width: min(760px, 95vw); }
+.paygrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; font-size: .88rem; }
+.paygrid span { display: block; color: var(--muted); font-size: .75rem; } .paygrid b { font-weight: 600; }
+@media (max-width: 860px) { .paygrid { grid-template-columns: 1fr 1fr; } }
+
+.dfoot { flex-wrap: wrap; }
+@media (max-width: 480px) { .dfoot .btn { flex: 1 1 42%; } dialog { padding: 1.1rem; } }

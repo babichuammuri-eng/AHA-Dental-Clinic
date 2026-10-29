@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My booking · AHA Dental</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="index.html"><i><svg viewBox="0 0 24 24" fill="none" stroke="#12302e" stroke-width="2.6" stroke-linecap="round"><path d="M4 9q8 12 16 0"/></svg></i> AHA Dental</a>
+  <nav><a href="index.html#services">Services</a><a class="cta" href="index.html#book">Book now</a></nav>
+</div></header>
+<main class="lookup wrap"><div class="box glass">
+  <h1 style="font-size:1.7rem">Check your booking</h1>
+  <p class="hint">Enter your reference number, your phone number, or both. To cancel or pay a deposit you need the reference number.</p>
+  <form id="lookupForm">
+    <label for="ref">Reference number (optional if you enter your phone)</label><input id="ref" placeholder="AHA-ABC123" autocomplete="off">
+    <label for="phone">Phone number (optional if you enter the reference)</label><input id="phone" type="tel">
+    <button class="btn block" style="margin-top:1rem" type="submit">Find my booking</button>
+    <p class="err" id="msg" role="status"></p>
+  </form>
+  <div id="result" hidden></div>
+</div></main>
+<script src="js/common.js"></script>
+<script src="js/payment.js"></script>
+<script src="js/lookup.js"></script>
+</body>
+</html>

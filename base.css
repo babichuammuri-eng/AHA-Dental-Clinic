@@ -1,0 +1,74 @@
+/* Shared by every page: colours, typography, buttons, forms, badges, dialogs, toast. */
+:root {
+  --bg: #eef6f5; --text: #12302e; --deep: #0c2b2a; --teal: #0f766e; --mint: #8fe0cb; --sky: #cfe3ff;
+  --muted: #4b6663; --line: rgba(18, 48, 46, .14); --err: #b42318;
+  --surface: rgba(255, 255, 255, .62); --surface-line: rgba(255, 255, 255, .8); --input: rgba(255, 255, 255, .88);
+  --shadow: 0 12px 40px -16px rgba(18, 48, 46, .3);
+}
+[data-theme="dark"] {
+  --bg: #08191a; --text: #e4f1ee; --muted: #9db8b4; --line: rgba(255, 255, 255, .14);
+  --surface: rgba(255, 255, 255, .07); --surface-line: rgba(255, 255, 255, .14); --input: rgba(255, 255, 255, .09);
+  --shadow: 0 12px 40px -16px rgba(0, 0, 0, .7);
+}
+* { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; }
+body { font: 400 1.0625rem/1.6 Figtree, system-ui, sans-serif; color: var(--text); background: var(--bg); min-height: 100vh; }
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; background:
+  radial-gradient(600px 420px at 88% 10%, rgba(143, 224, 203, .55), transparent),
+  radial-gradient(700px 500px at 0 60%, rgba(207, 227, 255, .55), transparent), var(--bg); }
+[data-theme="dark"] body::before { background: radial-gradient(600px 420px at 90% 5%, rgba(15, 118, 110, .35), transparent),
+  radial-gradient(700px 500px at 0 70%, rgba(37, 99, 235, .18), transparent), var(--bg); }
+h1, h2, h3 { font-family: 'Bricolage Grotesque', Figtree, sans-serif; line-height: 1.1; letter-spacing: -.02em; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+[hidden] { display: none !important; }
+.wrap { width: min(1120px, 100% - 2.5rem); margin-inline: auto; }
+.hint { font-size: .88rem; color: var(--muted); }
+.err { color: var(--err); font-weight: 500; } .ok { color: var(--teal); font-weight: 500; }
+
+/* Frosted glass surface */
+.glass { background: var(--surface); border: 1px solid var(--surface-line); box-shadow: var(--shadow);
+  -webkit-backdrop-filter: blur(18px) saturate(150%); backdrop-filter: blur(18px) saturate(150%); }
+@supports not (backdrop-filter: blur(1px)) { .glass { background: #fff; } [data-theme="dark"] .glass { background: #12302e; } }
+
+/* Forms */
+label { display: block; font-size: .88rem; font-weight: 600; margin: .8rem 0 .25rem; }
+input, select, textarea { width: 100%; font: inherit; padding: .65rem .75rem; border: 1.5px solid var(--line); border-radius: 10px; background: var(--input); color: var(--text); }
+textarea { resize: vertical; }
+
+/* Buttons */
+.btn { font: 600 .95rem Figtree, sans-serif; cursor: pointer; border-radius: 10px; padding: .65rem 1.1rem; border: 1.5px solid var(--teal); background: var(--teal); color: #fff; }
+.btn:hover { filter: brightness(.92); } .btn:disabled { opacity: .55; cursor: not-allowed; }
+.btn.ghost { background: transparent; color: var(--text); border-color: var(--line); }
+.btn.danger { background: transparent; color: var(--err); border-color: var(--err); }
+.btn.sm { padding: .3rem .7rem; font-size: .85rem; }
+.btn.block { display: block; width: 100%; }
+
+/* Status badges */
+.badge { display: inline-block; padding: .1rem .65rem; border-radius: 99px; font-size: .8rem; font-weight: 600; text-transform: capitalize; background: #e6eeec; color: #36504d; }
+.badge.pending, .badge.submitted, .badge.unpaid, .badge.refund_due { background: #fff1cc; color: #7a5a00; }
+.badge.confirmed, .badge.paid { background: #d4f1e9; color: #0b5f58; }
+.badge.completed, .badge.refunded { background: #dde7ff; color: #26408b; }
+.badge.cancelled, .badge.no_show, .badge.rejected, .badge.forfeited, .badge.expired { background: #fde1de; color: var(--err); }
+[data-theme="dark"] .badge { background: rgba(255, 255, 255, .12); color: #cfe3df; }
+[data-theme="dark"] .badge.pending, [data-theme="dark"] .badge.submitted, [data-theme="dark"] .badge.unpaid, [data-theme="dark"] .badge.refund_due { background: rgba(232, 163, 61, .25); color: #ffd58a; }
+[data-theme="dark"] .badge.confirmed, [data-theme="dark"] .badge.paid { background: rgba(15, 118, 110, .4); color: #9ff0dc; }
+[data-theme="dark"] .badge.completed, [data-theme="dark"] .badge.refunded { background: rgba(37, 99, 235, .3); color: #b9cdff; }
+[data-theme="dark"] .badge.cancelled, [data-theme="dark"] .badge.no_show, [data-theme="dark"] .badge.rejected, [data-theme="dark"] .badge.forfeited, [data-theme="dark"] .badge.expired { background: rgba(194, 65, 122, .3); color: #ffb3d1; }
+
+/* Dialog and toast */
+dialog { border: 0; border-radius: 18px; padding: 1.5rem; width: min(560px, 94vw); max-height: 92vh; color: var(--text); background: var(--bg); box-shadow: 0 24px 70px rgba(0, 0, 0, .4); }
+dialog::backdrop { background: rgba(8, 25, 24, .6); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); }
+.toast { position: fixed; left: 50%; bottom: 1.5rem; transform: translateX(-50%); z-index: 99; padding: .7rem 1.2rem; border-radius: 99px; background: var(--deep); color: #fff; font-weight: 500; box-shadow: var(--shadow); }
+.toast.bad { background: var(--err); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+a.btn { display: inline-block; text-decoration: none; text-align: center; }
+
+/* Checkbox cards (service pickers) */
+.checks { display: grid; gap: .5rem; margin-top: .8rem; max-height: 330px; overflow-y: auto; padding-right: .2rem; }
+.check { display: flex; gap: .75rem; align-items: center; margin: 0; padding: .6rem .8rem; border: 1.5px solid var(--line); border-radius: 12px; background: var(--input); cursor: pointer; font-weight: 500; }
+.check input { width: 20px; height: 20px; accent-color: var(--teal); flex: none; }
+.check:has(input:checked) { border-color: var(--teal); background: rgba(15, 118, 110, .14); }
+.check span { flex: 1; } .check small { display: block; font-weight: 400; color: var(--muted); font-size: .82rem; }
+.check b { font-size: .88rem; color: var(--teal); white-space: nowrap; }
+.btn, nav a, .logo { white-space: nowrap; }

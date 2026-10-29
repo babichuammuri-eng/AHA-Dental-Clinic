@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Doctor portal · AHA Dental Clinic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/staff/assets/staff.css">
+</head>
+<body>
+<div class="top"><div class="in">
+  <h1 id="who">Doctor portal <small id="spec"></small></h1>
+  <div class="tools"><span class="live">Live</span><button class="btn ghost sm" id="theme"></button><button class="btn ghost sm" id="logout">Sign out</button></div>
+</div></div>
+
+<main class="page">
+  <h2 id="hello"></h2>
+  <div class="stats" id="stats"></div>
+  <div class="panels two">
+    <div class="panel glass"><h3>Your visits, last 7 days</h3><div id="chartDay"></div></div>
+    <div class="panel glass"><h3>How it works</h3>
+      <p class="hint">Patients appear here after reception confirms their booking. Open a patient's history before you start, and press Complete visit to save the diagnosis and medicines to their record.</p></div>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="today">Today</button>
+    <button role="tab" aria-selected="false" data-tab="upcoming">Upcoming</button>
+    <button role="tab" aria-selected="false" data-tab="patients">My patients</button>
+  </div>
+  <div class="items" id="list"></div>
+</main>
+
+<dialog id="doneDlg"><form id="doneForm">
+  <h2 style="font-size:1.4rem" id="doneTitle">Complete visit</h2>
+  <p class="hint" id="doneSub"></p>
+  <label for="dDiag">Diagnosis (required)</label><input id="dDiag">
+  <label for="dTreat">Treatment done</label><input id="dTreat">
+  <label for="dMeds">Medicines prescribed</label><textarea id="dMeds" rows="2"></textarea>
+  <label for="dNotes">Notes for next visit</label><textarea id="dNotes" rows="2"></textarea>
+  <p class="err" id="dErr"></p>
+  <div class="dfoot"><button type="button" class="btn ghost" id="dCancel">Cancel</button><button class="btn" type="submit">Save to patient record</button></div>
+</form></dialog>
+<dialog id="histDlg"><div class="record" id="histBody"></div><div class="dfoot"><button class="btn ghost" id="histClose">Close</button></div></dialog>
+
+<script src="/js/common.js"></script>
+<script src="/staff/assets/doctor.js"></script>
+</body>
+</html>

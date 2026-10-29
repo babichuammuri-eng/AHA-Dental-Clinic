@@ -1,0 +1,8 @@
+/* Staff sign-in page. */
+.login { min-height: 100vh; display: grid; place-items: center; padding: 1rem; }
+.login .box { width: min(420px, 100%); border-radius: 20px; padding: 2rem; }
+.login .mark { display: flex; align-items: center; gap: .6rem; font: 700 1.3rem 'Bricolage Grotesque', Figtree, system-ui, sans-serif; margin-bottom: 1.2rem; }
+.login .mark i { width: 30px; height: 30px; border-radius: 50%; background: var(--mint); display: grid; place-items: center; }
+.login .mark svg { width: 18px; }
+.login h1 { font-size: 1.7rem; margin-bottom: .3rem; }
+.login .btn { margin-top: 1.2rem; width: 100%; padding: .8rem; }

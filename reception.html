@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Reception · AHA Dental Clinic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/staff/assets/staff.css">
+</head>
+<body>
+<div class="top"><div class="in">
+  <h1>AHA Dental <small>Reception dashboard</small></h1>
+  <div class="tools"><span class="live">Live</span><button class="btn ghost sm" id="theme"></button><button class="btn ghost sm" id="logout">Sign out</button></div>
+</div></div>
+
+<main class="page">
+  <div class="stats" id="stats"></div>
+  <div class="panels">
+    <div class="panel glass"><h3>Visits, last 7 days</h3><div id="chartDay"></div></div>
+    <div class="panel glass"><h3>Workload by doctor</h3><div id="chartDoctor"></div></div>
+    <div class="panel glass"><h3>Most requested services</h3><div id="chartService"></div></div>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="bookings">Bookings</button>
+    <button role="tab" aria-selected="false" data-tab="payments">Payments and receipts</button>
+    <button role="tab" aria-selected="false" data-tab="patients">Patients</button>
+  </div>
+
+  <section id="tabBookings">
+    <div class="toolbar">
+      <div class="grow"><label for="q">Search name, phone or reference</label><input id="q" type="search"></div>
+      <div><label for="fd">Date</label><input id="fd" type="date"></div>
+      <div><label for="fs">Status</label><select id="fs"><option value="">All</option><option>pending</option><option>confirmed</option><option>completed</option><option>cancelled</option><option>no_show</option></select></div>
+      <button class="btn" id="newBtn">New booking</button>
+    </div>
+    <div class="items" id="bookingList"></div>
+  </section>
+
+  <section id="tabPayments" hidden>
+    <div class="toolbar">
+      <div class="grow"><label for="yq">Search patient, phone, booking reference or receipt number</label><input id="yq" type="search" placeholder="e.g. AHA-R-2026-00012"></div>
+      <div><label for="ys">Payment status</label><select id="ys"><option value="">All</option><option>Unpaid</option><option>Awaiting verification</option><option>Partially paid</option><option>Paid in full</option><option>Refund due</option><option>Refunded</option><option>Deposit kept</option></select></div>
+    </div>
+    <div class="items" id="paymentList"></div>
+  </section>
+
+  <section id="tabPatients" hidden>
+    <div class="toolbar"><div class="grow"><label for="pq">Search patients</label><input id="pq" type="search"></div></div>
+    <div class="items" id="patientList"></div>
+  </section>
+</main>
+
+<dialog id="newDlg"><form id="newForm">
+  <h2 style="font-size:1.4rem">New booking</h2>
+  <label>Services</label><div class="checks plain" id="nServices"></div>
+  <div class="row"><div><label for="nDate">Date</label><input id="nDate" type="date" required></div>
+  <div><label for="nTime">Start time</label><select id="nTime"></select></div></div>
+  <label for="nName">Patient name</label><input id="nName" required>
+  <div class="row"><div><label for="nPhone">Phone</label><input id="nPhone" type="tel" required></div>
+  <div><label for="nEmail">Email</label><input id="nEmail" type="email"></div></div>
+  <label for="nNotes">Notes</label><textarea id="nNotes" rows="2"></textarea>
+  <p class="err" id="nErr"></p>
+  <div class="dfoot"><button type="button" class="btn ghost" id="nCancel">Cancel</button><button class="btn" type="submit">Save booking</button></div>
+</form></dialog>
+
+<dialog id="histDlg"><div class="record" id="histBody"></div><div class="dfoot"><button class="btn ghost" id="histClose">Close</button></div></dialog>
+
+<dialog id="ledgerDlg" class="wide"><div id="ledgerBody"></div>
+  <div class="dfoot"><button class="btn ghost" id="adjBtn">Authorized discount</button><button class="btn" id="recBtn">Record payment</button><button class="btn ghost" id="ledgerClose">Close</button></div></dialog>
+
+<dialog id="recDlg"><form id="recForm">
+  <h2 style="font-size:1.4rem">Record a payment</h2><p class="hint" id="recSub"></p>
+  <label for="rType">Payment type</label><select id="rType"><option value="deposit">Deposit</option><option value="partial">Partial payment</option><option value="final">Final payment (settles the balance)</option></select>
+  <label for="rAmount">Amount received (ETB)</label><input id="rAmount" type="number" min="1" step="1" required>
+  <label for="rMethod">Payment method</label><select id="rMethod"></select>
+  <div id="rRefBox"><label for="rRef">Transaction reference</label><input id="rRef" autocomplete="off" placeholder="From the payment message"></div>
+  <label for="rNote">Note (optional)</label><input id="rNote" maxlength="200">
+  <p class="err" id="rErr" role="alert"></p>
+  <div class="dfoot"><button type="button" class="btn ghost" data-close="recDlg">Cancel</button><button class="btn" type="submit">Verify and save payment</button></div>
+</form></dialog>
+
+<dialog id="refDlg"><form id="refForm">
+  <h2 style="font-size:1.4rem">Record a refund</h2><p class="hint" id="refSub"></p>
+  <label for="fAmount">Amount to refund (ETB)</label><input id="fAmount" type="number" min="1" step="1" required>
+  <label for="fMethod">How the money was returned</label><select id="fMethod"></select>
+  <div id="fRefBox"><label for="fRef">Transaction reference (optional)</label><input id="fRef" autocomplete="off"></div>
+  <label for="fReason">Reason (required)</label><input id="fReason" maxlength="200" required>
+  <p class="err" id="fErr" role="alert"></p>
+  <div class="dfoot"><button type="button" class="btn ghost" data-close="refDlg">Cancel</button><button class="btn danger" type="submit">Record refund</button></div>
+</form></dialog>
+
+<dialog id="adjDlg"><form id="adjForm">
+  <h2 style="font-size:1.4rem">Authorized discount</h2><p class="hint" id="adjSub"></p>
+  <label for="aAmount">Discount amount (ETB)</label><input id="aAmount" type="number" min="1" step="1" required>
+  <label for="aReason">Reason (required)</label><input id="aReason" maxlength="200" required>
+  <p class="err" id="aErr" role="alert"></p>
+  <div class="dfoot"><button type="button" class="btn ghost" data-close="adjDlg">Cancel</button><button class="btn" type="submit">Save discount</button></div>
+</form></dialog>
+
+<dialog id="patPayDlg" class="wide"><div id="patPayBody"></div><div class="dfoot"><button class="btn ghost" data-close="patPayDlg">Close</button></div></dialog>
+
+<script src="/js/common.js"></script>
+<script src="/staff/assets/admin.js"></script>
+</body>
+</html>
